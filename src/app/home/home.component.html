@@ -1,0 +1,38 @@
+<div style="text-align:center">
+  <h3>Welcome to {{ title }}<span *ngIf="username">, {{username}}</span>!</h3>
+  <form>
+    <mat-form-field>
+      <input matInput placeholder="username" [(ngModel)]="usernameInput" name="username" autocomplete="off" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="enter(usernameInput)">Set name</button>
+  </form>
+
+  <div *ngIf="username">
+    <div>
+      <form>
+        <mat-form-field>
+          <mat-select placeholder="Active rooms" [(value)]="selectedRoom">
+            <mat-option *ngFor="let room of rooms" [value]="room">
+              {{ room.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="selectedRoom?.pass">
+          <input matInput placeholder="Pass" [(ngModel)]="pass" name="pass" autocomplete="off" type="password" />
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="join(selectedRoom, pass)">Join</button>
+      </form>
+      <span>or</span>
+      <form>
+        <mat-form-field>
+          <input matInput placeholder="Room name" [(ngModel)]="newRoom.name" name="room-name" autocomplete="off" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Room pass" [(ngModel)]="newRoom.pass" name="room-pass" autocomplete="off" type="password" />
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="create(newRoom)">Create</button>
+      </form>
+    </div>
+  </div>
+
+</div>
